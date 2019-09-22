@@ -1,0 +1,65 @@
+body {
+  font-family: "Quicksand", sans-serif;
+  font-weight: 500;
+  background-color: rgb(13, 13, 13);
+  color: rgb(218, 218, 218);
+  text-align: center;
+  padding: 100px 100px;
+}
+
+.container {
+  /* w rodzica elementow ktore chcemy liczyc wstawiamy counter o dowolnejnazwie */
+  counter-reset: section;
+}
+
+.article-box {
+  position: relative;
+  /* uzywamy grida css tworzymy dwie kolumny dzieki funkcji repeat fr=frakcja */
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  /* przestrzen pomiedzy elementami w pionie */
+  grid-gap: 5px;
+}
+
+/* parzyste */
+.article-box:nth-child(even) .article-title,
+.article-box:nth-child(even) .article-text {
+  grid-column: 1;
+}
+
+/* nieparzyste */
+.article-box:nth-child(odd) .article-title,
+.article-box:nth-child(odd) .article-text {
+  grid-column: 2;
+}
+
+.article-box::after {
+  /* ten element podnosci licznik 'section' za kazdym razem jak sie pojawi */
+  counter-increment: section;
+  position: absolute;
+  /* zamiast content wstawiamy counter o naszej nazwie */
+  content: counter(section);
+  color: rgba(218, 218, 218, 0.3);
+  font-size: 15em;
+  top: -50%;
+}
+
+.article-box:nth-child(even)::after {
+  left: 30%;
+}
+
+.article-box:nth-child(odd)::after {
+  right: 30%;
+}
+
+.article-title {
+  font-size: 2em;
+  padding: 0;
+  margin: 0 50px 10px 50px;
+}
+
+.article-text {
+  font-size: 1em;
+  padding: 0;
+  margin: 0 100px 0 100px;
+}
